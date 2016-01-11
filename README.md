@@ -20,6 +20,26 @@ it, simply add the following line to your Podfile:
 pod "GradientButton"
 ```
 
+```ruby
+
+GradientButton *button = [[GradientButton alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
+[button setCenter:self.view.center];
+[button setTitle:@"Normal Button" forState:UIControlStateNormal];
+[button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+[button setbackgroundLayerWithColors:@[[UIColor redColor],[UIColor blueColor]] startPoint:CGPointMake(0, 0)];
+
+[self.view addSubview:button];
+
+GradientButton *autoLayoutButton = [GradientButton newAutoLayoutView];
+
+[autoLayoutButton setTitle:@"Autolayout Button" forState:UIControlStateNormal];
+[autoLayoutButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+[autoLayoutButton setbackgroundLayerWithColors:@[[UIColor redColor],[UIColor greenColor],[UIColor whiteColor]] startPoint:CGPointMake(0, 0)];
+
+[self.view addSubview:autoLayoutButton];
+
+````
+
 ## Author
 
 Giuseppe Nucifora, me@giuseppenucifora.com
