@@ -1,0 +1,15 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'GradientButton_Example', :exclusive => true do
+  pod "GradientButton", :path => "../"
+end
+
+target 'GradientButton_Tests', :exclusive => true do
+  pod "GradientButton", :path => "../"
+
+  pod 'Specta'
+  pod 'Expecta'
+  pod 'FBSnapshotTestCase'
+  pod 'Expecta+Snapshots'
+end
