@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 s.name             = "GradientButton"
-s.version          = "0.1.4"
+s.version          = "0.1.5"
 s.summary          = "GradientButton is a UIBUtton subclassing with gradient support"
 
 # This description is used to generate tags and improve search results.
@@ -34,5 +34,5 @@ s.resource_bundles = {
 
 # s.public_header_files = 'Pod/Classes/**/*.h'
 s.frameworks = 'QuartzCore'
-# s.dependency 'AFNetworking', '~> 2.3'
+s.dependency 'PureLayout'
 end

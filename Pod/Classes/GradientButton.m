@@ -7,6 +7,7 @@
 //
 
 #import "GradientButton.h"
+#import "PureLayout.h"
 
 @interface GradientButton()
 
@@ -15,6 +16,8 @@
 @property (nonatomic, strong) NSMutableArray *cgColors;
 @property (nonatomic) CGPoint startPoint;
 @property (nonatomic) BOOL didUpdateConstraints;
+@property (nonatomic, strong) UIView *container;
+@property (nonatomic, assign) BOOL didSetupConstraints;
 
 @end
 
@@ -24,9 +27,15 @@
 - (instancetype) init {
     self = [super init];
     if (self) {
-        [self addObserver:self forKeyPath:@"bounds" options:0 context:nil];
+        
         _colors = [[NSMutableArray alloc] init];
         _cgColors = [[NSMutableArray alloc] init];
+        _container = [UIView newAutoLayoutView];
+        [_container setBackgroundColor:[UIColor clearColor]];
+        [_container setAlpha:0];
+        [self addSubview:_container];
+        
+        [_container addObserver:self forKeyPath:@"bounds" options:0 context:nil];
     }
     return self;
 }
@@ -34,9 +43,14 @@
 - (instancetype) initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self addObserver:self forKeyPath:@"bounds" options:0 context:nil];
         _colors = [[NSMutableArray alloc] init];
         _cgColors = [[NSMutableArray alloc] init];
+        _container = [UIView newAutoLayoutView];
+        [_container setBackgroundColor:[UIColor clearColor]];
+        [_container setAlpha:0];
+         [self addSubview:_container];
+        
+         [_container addObserver:self forKeyPath:@"bounds" options:0 context:nil];
     }
     return self;
 }
@@ -44,34 +58,17 @@
 - (instancetype) initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self addObserver:self forKeyPath:@"bounds" options:0 context:nil];
         _colors = [[NSMutableArray alloc] init];
         _cgColors = [[NSMutableArray alloc] init];
+        _container = [[UIView alloc] initWithFrame:CGRectMake(0,0,frame.size.width,frame.size.height)];
+        [_container setBackgroundColor:[UIColor clearColor]];
+        [_container setAlpha:0];
+        [self addSubview:_container];
+        
+         [_container addObserver:self forKeyPath:@"bounds" options:0 context:nil];
     }
     return self;
 }
-
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect {
- // Drawing code
- }
- 
- UIColor *topColor = [@"fd843e" colorFromHex];
- UIColor *bottomColor = [@"ff4e50" colorFromHex];
- 
- CAGradientLayer *checkoutButtonViewGradient = [CAGradientLayer layer];
- checkoutButtonViewGradient.colors = [NSArray arrayWithObjects: (id)topColor.CGColor, (id)bottomColor.CGColor, nil];
- checkoutButtonViewGradient.frame = _checkoutButton.bounds;
- checkoutButtonViewGradient.startPoint = CGPointMake(0, 0);
- 
- [_checkoutButton.layer insertSublayer:checkoutButtonViewGradient atIndex:0];
- */
-
-
-
-
 
 - (void) setbackgroundLayerWithColors:(NSArray *) colors startPoint:(CGPoint) startPoint {
     if (colors && [colors count] > 0) {
@@ -112,8 +109,19 @@
     }
 }
 
+- (void) updateConstraints {
+    [super updateConstraints];
+    
+    if (!self.didSetupConstraints) {
+        [_container autoPinEdgesToSuperviewEdges];
+        [_container autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
+        [_container autoAlignAxisToSuperviewAxis:ALAxisVertical];
+    }
+}
+
 - (void) setFrame:(CGRect)frame {
     [super setFrame:frame];
+    [_container setFrame:CGRectMake(0,0,frame.size.width,frame.size.height)];
     dispatch_async(dispatch_get_main_queue(), ^{
         if (_gradientLayer) {
             [self setbackgroundLayerWithColors:_colors startPoint:_startPoint];
@@ -145,7 +153,7 @@
 
 - (void) dealloc {
     
-    [self removeObserver:self forKeyPath:@"bounds"];
+    [_container removeObserver:self forKeyPath:@"bounds"];
 }
 
 
