@@ -143,5 +143,10 @@
 }
 
 
+- (void) dealloc {
+    
+    [self removeObserver:self forKeyPath:@"bounds"];
+}
+
 
 @end
