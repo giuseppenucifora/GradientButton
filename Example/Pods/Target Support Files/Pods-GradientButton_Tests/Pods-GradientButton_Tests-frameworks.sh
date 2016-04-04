@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-GradientButton_Tests/GradientButton.framework"
+  install_framework "Pods-GradientButton_Tests/PureLayout.framework"
   install_framework "Pods-GradientButton_Tests/Expecta.framework"
   install_framework "Pods-GradientButton_Tests/Expecta_Snapshots.framework"
   install_framework "Pods-GradientButton_Tests/FBSnapshotTestCase.framework"
@@ -92,6 +93,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-GradientButton_Tests/GradientButton.framework"
+  install_framework "Pods-GradientButton_Tests/PureLayout.framework"
   install_framework "Pods-GradientButton_Tests/Expecta.framework"
   install_framework "Pods-GradientButton_Tests/Expecta_Snapshots.framework"
   install_framework "Pods-GradientButton_Tests/FBSnapshotTestCase.framework"

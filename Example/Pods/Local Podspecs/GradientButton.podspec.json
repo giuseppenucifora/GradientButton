@@ -21,5 +21,10 @@
       "Pod/Assets/*.png"
     ]
   },
-  "frameworks": "QuartzCore"
+  "frameworks": "QuartzCore",
+  "dependencies": {
+    "PureLayout": [
+
+    ]
+  }
 }
