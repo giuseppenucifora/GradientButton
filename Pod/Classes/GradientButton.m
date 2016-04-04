@@ -69,18 +69,8 @@
  [_checkoutButton.layer insertSublayer:checkoutButtonViewGradient atIndex:0];
  */
 
-- (void) layoutIfNeeded {
-    NSLog(@"layout");
-}
 
-- (void) updateConstraints {
-    
-    if (!self.didUpdateConstraints) {
-        
-        self.didUpdateConstraints = YES;
-    }
-    [super updateConstraints];
-}
+
 
 
 - (void) setbackgroundLayerWithColors:(NSArray *) colors startPoint:(CGPoint) startPoint {
@@ -152,6 +142,11 @@
     }
 }
 
+
+- (void) dealloc {
+    
+    [self removeObserver:self forKeyPath:@"bounds"];
+}
 
 
 @end

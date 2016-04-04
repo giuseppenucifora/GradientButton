@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 s.name             = "GradientButton"
-s.version          = "0.1.1"
+s.version          = "0.1.4"
 s.summary          = "GradientButton is a UIBUtton subclassing with gradient support"
 
 # This description is used to generate tags and improve search results.
