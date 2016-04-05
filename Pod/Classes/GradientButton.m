@@ -16,8 +16,6 @@
 @property (nonatomic, strong) NSMutableArray *cgColors;
 @property (nonatomic) CGPoint startPoint;
 @property (nonatomic) BOOL didUpdateConstraints;
-@property (nonatomic, strong) UIView *container;
-@property (nonatomic, assign) BOOL didSetupConstraints;
 
 @end
 
@@ -30,12 +28,6 @@
         
         _colors = [[NSMutableArray alloc] init];
         _cgColors = [[NSMutableArray alloc] init];
-        _container = [UIView newAutoLayoutView];
-        [_container setBackgroundColor:[UIColor clearColor]];
-        [_container setAlpha:0];
-        [self addSubview:_container];
-        
-        [_container addObserver:self forKeyPath:@"bounds" options:0 context:nil];
     }
     return self;
 }
@@ -45,12 +37,6 @@
     if (self) {
         _colors = [[NSMutableArray alloc] init];
         _cgColors = [[NSMutableArray alloc] init];
-        _container = [UIView newAutoLayoutView];
-        [_container setBackgroundColor:[UIColor clearColor]];
-        [_container setAlpha:0];
-         [self addSubview:_container];
-        
-         [_container addObserver:self forKeyPath:@"bounds" options:0 context:nil];
     }
     return self;
 }
@@ -60,12 +46,6 @@
     if (self) {
         _colors = [[NSMutableArray alloc] init];
         _cgColors = [[NSMutableArray alloc] init];
-        _container = [[UIView alloc] initWithFrame:CGRectMake(0,0,frame.size.width,frame.size.height)];
-        [_container setBackgroundColor:[UIColor clearColor]];
-        [_container setAlpha:0];
-        [self addSubview:_container];
-        
-         [_container addObserver:self forKeyPath:@"bounds" options:0 context:nil];
     }
     return self;
 }
@@ -109,19 +89,10 @@
     }
 }
 
-- (void) updateConstraints {
-    [super updateConstraints];
-    
-    if (!self.didSetupConstraints) {
-        [_container autoPinEdgesToSuperviewEdges];
-        [_container autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
-        [_container autoAlignAxisToSuperviewAxis:ALAxisVertical];
-    }
-}
+
 
 - (void) setFrame:(CGRect)frame {
     [super setFrame:frame];
-    [_container setFrame:CGRectMake(0,0,frame.size.width,frame.size.height)];
     dispatch_async(dispatch_get_main_queue(), ^{
         if (_gradientLayer) {
             [self setbackgroundLayerWithColors:_colors startPoint:_startPoint];
@@ -143,17 +114,9 @@
 {
     if (object == self && [keyPath isEqualToString:@"bounds"]) {
         if(_gradientLayer) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self setbackgroundLayerWithColors:_colors startPoint:_startPoint];
-            });
+            [self setbackgroundLayerWithColors:_colors startPoint:_startPoint];
         }
     }
-}
-
-
-- (void) dealloc {
-    
-    [_container removeObserver:self forKeyPath:@"bounds"];
 }
 
 
