@@ -9,8 +9,6 @@
 #import "GradientButton.h"
 #import "PureLayout.h"
 
-static char ClassNameKVOContext = 0;
-
 @interface GradientButton()
 
 @property (nonatomic, strong) CAGradientLayer *gradientLayer;
@@ -114,11 +112,9 @@ static char ClassNameKVOContext = 0;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if (context == ClassNameKVOContext && object == self && [keyPath isEqualToString:@"bounds"]) {
+    if (object == self && [keyPath isEqualToString:@"bounds"]) {
         if(_gradientLayer) {
-            
             [self setbackgroundLayerWithColors:_colors startPoint:_startPoint];
-            
         }
     }
 }
