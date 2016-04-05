@@ -10,12 +10,14 @@
 #import "GradientButton.h"
 #import "PureLayout/PureLayout.h"
 
+
 @interface gradiendButtonViewController () {
     
     GradientButton *button;
     GradientButton *autoLayoutButton;
     BOOL didUpdateConstraints;
     
+    UIButton *presentControllerButton;
 }
 
 @end
@@ -41,6 +43,13 @@
     [autoLayoutButton setbackgroundLayerWithColors:@[[UIColor greenColor],[UIColor whiteColor],[UIColor redColor]] startPoint:CGPointMake(0, 1)];
     
     [self.view addSubview:autoLayoutButton];
+    
+    presentControllerButton = [UIButton newAutoLayoutView];
+    [presentControllerButton setTitle:@"Presenta Conttoller" forState:UIControlStateNormal];
+    [presentControllerButton addTarget:self action:@selector(presentAction:) forControlEvents:UIControlEventTouchUpInside];
+    [presentControllerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    [self.view addSubview:presentControllerButton];
     
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -98,11 +107,26 @@
         [autoLayoutButton autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:40];
         [autoLayoutButton autoSetDimension:ALDimensionHeight toSize:50];
         
+        [presentControllerButton autoMatchDimension:ALDimensionHeight toDimension:ALDimensionHeight ofView:autoLayoutButton];
+        [presentControllerButton autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:autoLayoutButton];
+        [presentControllerButton autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:autoLayoutButton];
+        [presentControllerButton autoAlignAxisToSuperviewAxis:ALAxisVertical];
+        
         didUpdateConstraints = YES;
     }
     [super updateViewConstraints];
 }
 
+- (void) presentAction:(UIButton *) sender {
+    gradiendButtonViewController *viewController = [[gradiendButtonViewController alloc] init];
+    
+    [self presentViewController:viewController animated:YES completion:nil];
+    
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [viewController dismissViewControllerAnimated:YES completion:nil];
+    });
+}
 
 - (void)didReceiveMemoryWarning
 {
