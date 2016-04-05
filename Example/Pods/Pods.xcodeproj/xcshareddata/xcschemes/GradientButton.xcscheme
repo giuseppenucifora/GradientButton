@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '7E070188C2CFA00BC528E820'
+               BlueprintIdentifier = 'A005A3C52F8B1643B0539EAB'
                BlueprintName = 'GradientButton'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'GradientButton.framework'>

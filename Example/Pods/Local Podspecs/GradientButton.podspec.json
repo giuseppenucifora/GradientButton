@@ -1,6 +1,6 @@
 {
   "name": "GradientButton",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "summary": "GradientButton is a UIBUtton subclassing with gradient support",
   "homepage": "https://github.com/giuseppenucifora/GradientButton",
   "license": "MIT",
@@ -9,7 +9,7 @@
   },
   "source": {
     "git": "https://github.com/giuseppenucifora/GradientButton.git",
-    "tag": "0.1.4"
+    "tag": "0.2.0"
   },
   "platforms": {
     "ios": "7.0"
