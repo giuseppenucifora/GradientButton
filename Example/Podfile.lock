@@ -9,9 +9,11 @@ PODS:
   - FBSnapshotTestCase/Core (2.1.0)
   - FBSnapshotTestCase/SwiftSupport (2.1.0):
     - FBSnapshotTestCase/Core
-  - GradientButton (0.2.0):
+  - GradientButton (0.2.5):
     - PureLayout
+    - RZDataBinding
   - PureLayout (3.0.1)
+  - RZDataBinding (2.0.3)
   - Specta (1.0.5)
 
 DEPENDENCIES:
@@ -30,8 +32,9 @@ SPEC CHECKSUMS:
   Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
   Expecta+Snapshots: c343f410c7a6392f3e22e78f94c44b6c0749a516
   FBSnapshotTestCase: 366ecd378511d7716c79991cd8067d1eed23578d
-  GradientButton: 7be2c4bc564d0cfe7c3043a4410723d95050cc0d
+  GradientButton: 39ca21ff38e9270f0c8a55ed96d00d7b32a3d4d9
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
+  RZDataBinding: 00d468ebe667f02c2bd5416f87b4b5d826188c4d
   Specta: ac94d110b865115fe60ff2c6d7281053c6f8e8a2
 
 COCOAPODS: 0.39.0

@@ -8,6 +8,7 @@
 
 #import "GradientButton.h"
 #import "PureLayout.h"
+#import <RZDataBinding/RZDataBinding.h>
 
 @interface GradientButton()
 
@@ -28,6 +29,8 @@
         
         _colors = [[NSMutableArray alloc] init];
         _cgColors = [[NSMutableArray alloc] init];
+        
+        [self rz_addTarget:self action:@selector(valueChanged:) forKeyPathChange:@"bounds"];
     }
     return self;
 }
@@ -37,6 +40,8 @@
     if (self) {
         _colors = [[NSMutableArray alloc] init];
         _cgColors = [[NSMutableArray alloc] init];
+        
+        [self rz_addTarget:self action:@selector(valueChanged:) forKeyPathChange:@"bounds"];
     }
     return self;
 }
@@ -46,6 +51,8 @@
     if (self) {
         _colors = [[NSMutableArray alloc] init];
         _cgColors = [[NSMutableArray alloc] init];
+        
+        [self rz_addTarget:self action:@selector(valueChanged:) forKeyPathChange:@"bounds"];
     }
     return self;
 }
@@ -109,12 +116,19 @@
     });
 }
 
+/*
+ NSString* const kRZDBChangeKeyObject  = @"RZDBChangeObject";
+ NSString* const kRZDBChangeKeyOld     = @"RZDBChangeOld";
+ NSString* const kRZDBChangeKeyNew     = @"RZDBChangeNew";
+ NSString* const kRZDBChangeKeyKeyPath = @"RZDBChangeKeyPath";
+ */
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if (object == self && [keyPath isEqualToString:@"bounds"]) {
+- (void) valueChanged:(NSDictionary *) value {
+    if ([value objectForKey:kRZDBChangeKeyNew]) {
         if(_gradientLayer) {
-            [self setbackgroundLayerWithColors:_colors startPoint:_startPoint];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self setbackgroundLayerWithColors:_colors startPoint:_startPoint];
+            });
         }
     }
 }
