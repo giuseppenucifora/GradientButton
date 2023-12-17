@@ -1,0 +1,4 @@
+*.framework filter=lfs diff=lfs merge=lfs -text
+libavcodec.a filter=lfs diff=lfs merge=lfs -text
+GoogleMapsBase filter=lfs diff=lfs merge=lfs -text
+GoogleMapsCore filter=lfs diff=lfs merge=lfs -text
